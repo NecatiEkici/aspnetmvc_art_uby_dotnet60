@@ -43,12 +43,12 @@ body {
       content: ""; }
 
 a {
-  color: #F6490D;
+  color: #ff1381;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s; }
   a:hover, a:active, a:focus {
-    color: #F6490D;
+    color: #ff1381;
     outline: none;
     text-decoration: none; }
 
@@ -62,15 +62,15 @@ h1, h2, h3, h4, h5, h6, figure {
 
 ::-webkit-selection {
   color: #fff;
-  background: #F6490D; }
+  background: #ff1381; }
 
 ::-moz-selection {
   color: #fff;
-  background: #F6490D; }
+  background: #ff1381; }
 
 ::selection {
   color: #fff;
-  background: #F6490D; }
+  background: #ff1381; }
 
 @media screen and (max-width: 768px) {
   .colorlib-nav {
@@ -114,7 +114,7 @@ h1, h2, h3, h4, h5, h6, figure {
       -o-transition: 0.5s;
       transition: 0.5s; }
       .colorlib-nav ul li a:hover {
-        color: #F6490D; }
+        color: #ff1381; }
     .colorlib-nav ul li.has-dropdown {
       position: relative; }
       .colorlib-nav ul li.has-dropdown .dropdown {
@@ -167,12 +167,12 @@ h1, h2, h3, h4, h5, h6, figure {
             .colorlib-nav ul li.has-dropdown .dropdown li a:hover {
               color: #fff; }
       .colorlib-nav ul li.has-dropdown:hover a, .colorlib-nav ul li.has-dropdown:focus a {
-        color: #F6490D; }
+        color: #ff1381; }
     .colorlib-nav ul li.btn-cta a {
       padding: 30px 0px !important;
       color: #fff; }
       .colorlib-nav ul li.btn-cta a span {
-        background: #f6490d;
+        background: #ff1381;
         padding: 4px 10px;
         display: -moz-inline-stack;
         display: inline-block;
@@ -190,7 +190,7 @@ h1, h2, h3, h4, h5, h6, figure {
         -moz-box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75);
         box-shadow: 0px 14px 20px -9px rgba(0, 0, 0, 0.75); }
     .colorlib-nav ul li.active > a {
-      color: #F6490D !important;
+      color: #ff1381 !important;
       position: relative; }
       .colorlib-nav ul li.active > a:after {
         opacity: 1;
@@ -235,7 +235,7 @@ h1, h2, h3, h4, h5, h6, figure {
       display: table-cell;
       vertical-align: middle;
       font-size: 40px;
-      color: #F6490D; }
+      color: #ff1381; }
   .colorlib-video .overlay {
     position: absolute;
     top: 0;
@@ -580,7 +580,7 @@ blockquote {
   padding-top: 20px;
   padding-left: 30px;
   background: #fafafa;
-  border-left-color: #F6490D;
+  border-left-color: #ff1381;
   font-style: italic;
   color: #999999;
   font-size: 20px; }
@@ -677,7 +677,7 @@ blockquote {
     -moz-border-radius: 0;
     -ms-border-radius: 0;
     border-radius: 0;
-    background: #F6490D;
+    background: #ff1381;
     color: #fff;
     border: none;
     padding: 14px; }
@@ -791,7 +791,7 @@ blockquote {
     #colorlib-container .owl-theme .owl-controls .owl-nav [class*=owl-] i {
       border: none; }
     #colorlib-container .owl-theme .owl-controls .owl-nav [class*=owl-]:hover {
-      background: #F6490D; }
+      background: #ff1381; }
   #colorlib-container .owl-carousel .owl-controls .owl-nav .owl-next i,
   #colorlib-container .owl-carousel .owl-controls .owl-nav .owl-prev i {
     font-size: 14px;
@@ -895,7 +895,7 @@ input[type="text"] {
       display: inline-block;
       zoom: 1;
       *display: inline;
-      color: #F6490D;
+      color: #ff1381;
       padding-left: 10px;
       padding-right: 10px; }
       .colorlib-social-icons li a i {
@@ -931,23 +931,23 @@ input[type="text"] {
       -ms-border-radius: 2px;
       border-radius: 2px; }
     .pagination li a:hover, .pagination li a:focus {
-      background: #F6490D;
+      background: #ff1381;
       color: #fff;
-      border: 1px solid #F6490D;
+      border: 1px solid #ff1381;
       -webkit-box-shadow: 0 2px 10px -5px black;
       box-shadow: 0 2px 10px -5px black; }
     @media screen and (max-width: 768px) {
       .pagination li a {
         padding: 7px 15px; } }
   .pagination li.active a {
-    background: #F6490D;
-    border-color: #F6490D;
+    background: #ff1381;
+    border-color: #ff1381;
     -webkit-box-shadow: 0 2px 10px -5px black;
     box-shadow: 0 2px 10px -5px black; }
     .pagination li.active a:hover, .pagination li.active a:focus {
-      background: #F6490D;
+      background: #ff1381;
       color: #fff;
-      border: 1px solid #F6490D; }
+      border: 1px solid #ff1381; }
 
 #colorlib-footer {
   background: #212125; }
@@ -975,7 +975,7 @@ input[type="text"] {
           padding-right: 5px;
           color: #666666; }
         #colorlib-footer .colorlib-footer-links li a:hover {
-          color: #F6490D; }
+          color: #ff1381; }
   #colorlib-footer h2 {
     margin-bottom: 30px;
     font-size: 14px;
@@ -994,9 +994,9 @@ input[type="text"] {
       font-size: 13px;
       border-radius: 4px; }
       #colorlib-footer .tags span a:hover {
-        background: #F6490D;
+        background: #ff1381;
         color: #fff;
-        border: 1px solid #F6490D;
+        border: 1px solid #ff1381;
         -webkit-box-shadow: 0 2px 10px -5px black;
         box-shadow: 0 2px 10px -5px black; }
   #colorlib-footer .f-blog {
@@ -1115,7 +1115,7 @@ input[type="text"] {
     width: 50px;
     height: 50px;
     display: table;
-    background: #f6490d;
+    background: #ff1381;
     color: #fff;
     text-align: center;
     -webkit-border-radius: 4px;
@@ -1243,18 +1243,18 @@ input[type="text"] {
     outline: none !important; }
 
 .btn-primary {
-  background: #F6490D;
+  background: #ff1381;
   color: #fff;
-  border: 2px solid #F6490D; }
+  border: 2px solid #ff1381; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background: #f75b26 !important;
     border-color: #f75b26 !important; }
   .btn-primary.btn-outline {
     background: transparent;
-    color: #F6490D;
-    border: 2px solid #F6490D; }
+    color: #ff1381;
+    border: 2px solid #ff1381; }
     .btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
-      background: #F6490D;
+      background: #ff1381;
       color: #fff; }
 
 .btn-success {
@@ -1363,7 +1363,7 @@ input[type="text"] {
     outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-color: #F6490D; }
+    border-color: #ff1381; }
 
 .row-pb-lg {
   padding-bottom: 6em !important; }
