@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML>
+<html>
+@{
+    await Html.RenderPartialAsync("_Head");
+}
+
+<body>
+
+    @{
+        await Html.RenderPartialAsync("_Loader");
+    }
+
+    <div id="page">
+
+        @{
+            await Html.RenderPartialAsync("_Nav");
+        }
+
+        @RenderBody()
+
+        @{
+            await Html.RenderPartialAsync("_Instagram");
+        }
+
+        @{
+            await Html.RenderPartialAsync("_Footer");
+        }
+
+    </div>
+
+    @{
+        await Html.RenderPartialAsync("_ArrowUp");
+    }
+
+    @{
+        await Html.RenderPartialAsync("_Scripts");
+    }
+
+</body>
+
+</html>
+
