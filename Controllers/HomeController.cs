@@ -18,41 +18,63 @@ public class HomeController : Controller
 
 	public IActionResult Index()
 	{
-        var model = new IndexViewModel()
-        {
-			Site=db.Sites!.First()
-        };
-        return View(model);
+		var model = new IndexViewModel()
+		{
+			Site=db.Sites!.First(),
+			Slides=db.Slides.OrderBy(x=>x.Order).Where(x=>x.Isview==true).ToList(),
+		};
+		
+		return View(model);
 	}
 
 	[Route("/contact")]
 	public IActionResult Contact()
 	{
-		return View();
+		var model = new IndexViewModel()
+		{
+			Site=db.Sites!.First()
+		};
+		return View(model);
 	}
 
 	[Route("/about")]
 	public IActionResult About()
 	{
-		return View();
+		var model = new IndexViewModel()
+		{
+			Site=db.Sites!.First()
+		};
+		return View(model);
 	}
 
 	[Route("/blog")]
 	public IActionResult Blog()
 	{
-		return View();
+		var model = new IndexViewModel()
+		{
+			Site=db.Sites!.First()
+		};
+		return View(model);
 	}
 
 	[Route("/event")]
 	public IActionResult Event()
 	{
-		return View();
+		var model = new IndexViewModel()
+		{
+			Site=db.Sites!.First()
+		};
+		return View(model);
 	}
 
 	 [Route("/work")]
 	public IActionResult Work()
 	{
-		return View();
+		var model = new IndexViewModel()
+		{
+			Site=db.Sites!.First()
+		};
+		return View(model);
 	}
 
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
