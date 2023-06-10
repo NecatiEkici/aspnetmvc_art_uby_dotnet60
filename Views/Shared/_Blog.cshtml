@@ -11,17 +11,18 @@
                     <div class="col-md-4">
                         <div class="blog-entry">
                             <div class="blog-img">
-                                <a href=""><img src="~/images/blog-1.jpg" class="img-responsive"
+                                <a href="/blog/@Methods.GenerateUrl(item.Title!)/@item.Id"><img src="~/uploads/images/@item.Image" class="img-responsive"
                                         alt="html5 bootstrap template"></a>
                             </div>
                             <div class="desc">
                                 <p class="meta">
-                                    <span class="cat"><a href="#">Events</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
+                                    <span class="cat"><a href="/blog">Blog</a></span>
+                                    <span class="date">@(String.Format("{0:dd MMM yyyy}",item.Date))</span>
+                                    <span class="pos"><i class="icon-eye text-success"></i> @item.Read </span>
+                                    <span class="pos"><i class="fa-sharp fa-solid fa-heart text-danger"></i> @item.Like </span>
                                 </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary </p>
+                                <h2><a href="/blog/@Methods.GenerateUrl(item.Title!)/@item.Id">@item.Title</a></h2>
+                                <p>@item.Subtitle</p>
                             </div>
                         </div>
                     </div>
