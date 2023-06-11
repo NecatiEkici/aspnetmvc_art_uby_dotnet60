@@ -22,6 +22,7 @@ public partial class PmitLn2oqDb0001Context : DbContext
     public virtual DbSet<Slide>? Slides { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
         => optionsBuilder.UseMySql("server=93.89.225.198;port=3306;database=pmitLn2oq_db0001;user=pmitLn2oq_user01;password=Ds4FH2f8", Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.30-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -54,7 +55,7 @@ public partial class PmitLn2oqDb0001Context : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("read");
             entity.Property(e => e.Subtitle)
-                .HasMaxLength(250)
+                .HasMaxLength(500)
                 .HasColumnName("subtitle");
             entity.Property(e => e.Title)
                 .HasMaxLength(250)
@@ -91,6 +92,9 @@ public partial class PmitLn2oqDb0001Context : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(250)
                 .HasColumnName("name");
+            entity.Property(e => e.Page)
+                .HasColumnType("int(11)")
+                .HasColumnName("page");
             entity.Property(e => e.Title)
                 .HasMaxLength(250)
                 .HasColumnName("title");

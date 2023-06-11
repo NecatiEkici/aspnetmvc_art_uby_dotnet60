@@ -24,4 +24,6 @@ public partial class Site
     public string? Logo2 { get; set; }
 
     public string? Favicon { get; set; }
+
+    public int Page { get; set; }
 }
