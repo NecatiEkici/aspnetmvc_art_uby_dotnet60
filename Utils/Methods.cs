@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-public class Methods
+class Methods
 {
 	public static string GenerateUrl(string Url)
 	{
@@ -14,8 +14,7 @@ public class Methods
 		seoUrl = seoUrl.Replace("ç", "c");
 		seoUrl = seoUrl.Replace("ğ", "g");
 		seoUrl = seoUrl.Replace("ö", "o");
-		seoUrl = seoUrl.Replace("ü", "u");	
-		
+		seoUrl = seoUrl.Replace("ü", "u");			
 		return seoUrl;
 	}
 }
