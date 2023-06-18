@@ -56,12 +56,20 @@ public class HomeController : Controller
 		return View(model);
 	}
 
-	[Route("/blog")]
-	public IActionResult Blog()
+	[Route("/blog/{currentPage?}")]
+	public IActionResult Blog(int currentPage)
 	{
+		if (currentPage==0)
+		{
+			currentPage = 1;
+		}
+		
+		HttpContext.Session.SetInt32("currentPage", currentPage);	
+
 		var model = new IndexViewModel()
 		{
-			Site = db.Sites!.First()
+			Site = db.Sites!.First(),			
+			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 		};
 		return View(model);
 	}

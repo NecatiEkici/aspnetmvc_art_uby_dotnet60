@@ -26,7 +26,7 @@
 
 <div id="colorlib-container">
     <div class="container">
-        <p> current page: @sessionCurrentPage</p>
+       
 
         @if (Model.Blogs != null)
         {
@@ -68,12 +68,12 @@
                             }
                             else
                             {
-                                <a href="/@(currentPage-1)">&laquo;</a>
+                                <a href="~/@(currentPage-1)">&laquo;</a>
                             }
                         </li>
                         @for (int i = 1; i <= page; i++)
                         {
-                            <li class='@(currentPage==i?"active":"")'><a href="/@i">@i</a></li>
+                            <li class='@(currentPage==i?"active":"")'><a href="~/@i">@i</a></li>
                         }
                         <li class='@(currentPage==page?"disabled":"")'>
                             @if (currentPage == page)
@@ -82,7 +82,7 @@
                             }
                             else
                             {
-                                <a href="/@(currentPage+1)">&raquo;</a>
+                                <a href="~/@(currentPage+1)">&raquo;</a>
                             }
                         </li>
                     </ul>
