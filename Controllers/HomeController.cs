@@ -73,6 +73,21 @@ public class HomeController : Controller
 		};
 		return View(model);
 	}
+	
+	[Route("/blog/{title?}/{id?}")]
+	public IActionResult BlogDetail(String title, int id)
+	{		
+		var model = new IndexViewModel()
+		{
+			Site = db.Sites!.First(),
+			Blog = db.Blogs!.FirstOrDefault(x => x.Isview == true && x.Id==id),						
+			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+		};
+		
+		return View(model);
+	}
+	
+	
 
 	[Route("/event")]
 	public IActionResult Event()

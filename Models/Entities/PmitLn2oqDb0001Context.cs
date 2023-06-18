@@ -15,14 +15,16 @@ public partial class PmitLn2oqDb0001Context : DbContext
     {
     }
 
-    public virtual DbSet<Blog>? Blogs { get; set; }
+    public virtual DbSet<Blog> Blogs { get; set; }
 
-    public virtual DbSet<Site>? Sites { get; set; }
+    public virtual DbSet<Comment> Comments { get; set; }
 
-    public virtual DbSet<Slide>? Slides { get; set; }
+    public virtual DbSet<Site> Sites { get; set; }
+
+    public virtual DbSet<Slide> Slides { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseMySql("server=93.89.225.198;port=3306;database=pmitLn2oq_db0001;user=pmitLn2oq_user01;password=Ds4FH2f8", Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.30-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,6 +62,32 @@ public partial class PmitLn2oqDb0001Context : DbContext
             entity.Property(e => e.Title)
                 .HasMaxLength(250)
                 .HasColumnName("title");
+        });
+
+        modelBuilder.Entity<Comment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("comment");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Comment1)
+                .HasColumnType("text")
+                .HasColumnName("comment");
+            entity.Property(e => e.Date)
+                .HasColumnType("datetime")
+                .HasColumnName("date");
+            entity.Property(e => e.Person)
+                .HasMaxLength(250)
+                .HasColumnName("person");
+            entity.Property(e => e.Type)
+                .HasMaxLength(50)
+                .HasColumnName("type");
+            entity.Property(e => e.Typeid)
+                .HasColumnType("int(11)")
+                .HasColumnName("typeid");
         });
 
         modelBuilder.Entity<Site>(entity =>
