@@ -11,9 +11,15 @@ public partial class Comment
 
     public int? Typeid { get; set; }
 
-    public string? Person { get; set; }
+    public string? Name { get; set; }
+
+    public string? Lastname { get; set; }
+
+    public string? Email { get; set; }
 
     public DateTime? Date { get; set; }
 
-    public string? Comment1 { get; set; }
+    public string? Message { get; set; }
+
+    public bool? Isview { get; set; }
 }

@@ -82,6 +82,7 @@ public class HomeController : Controller
 			Site = db.Sites!.First(),
 			Blog = db.Blogs!.FirstOrDefault(x => x.Isview == true && x.Id==id),						
 			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Comments = db.Comments!.OrderByDescending(x => x.Id).Where(x => x.Isview == true && x.Type=="blog" && x.Typeid==id).ToList(),			
 		};
 		
 		return View(model);

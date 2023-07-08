@@ -9,6 +9,7 @@ public class IndexViewModel
 	public IEnumerable<Slide>? Slides { get; set; }
 	
 	public Blog? Blog { get; set; }	
-	public IEnumerable<Blog>? Blogs { get; set; }
+	public IEnumerable<Blog>? Blogs { get; set; }	
+	public IEnumerable<Comment>? Comments { get; set; }
 	
 }

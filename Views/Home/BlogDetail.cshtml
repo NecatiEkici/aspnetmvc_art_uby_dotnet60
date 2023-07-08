@@ -25,7 +25,8 @@
 									<span class="cat"><a href="/blog">Blog</a></span>
 									<span class="date">@(String.Format("{0:dd MMM yyyy}", Model.Blog.Date))</span>
 									<span class="pos"><i class="icon-eye text-success"></i> @Model.Blog.Read </span>
-									<span class="pos"><i class="fa-sharp fa-solid fa-heart text-danger"></i> @Model.Blog.Like
+									<span class="pos"><i class="fa-sharp fa-solid fa-heart text-danger"></i>
+										@Model.Blog.Like
 									</span>
 								</p>
 								<h2>@Model.Blog.Title</h2>
@@ -36,54 +37,34 @@
 				</div>
 				<div class="row row-pb-lg">
 					<div class="col-md-12">
-						<h2 class="heading-2">23 Comments</h2>
-						<div class="review">
-							<div class="user-img" style="background-image: url(images/person1.jpg)"></div>
-							<div class="desc">
-								<h4>
-									<span class="text-left">Jacob Webb</span>
-									<span class="text-right">24 March 2018</span>
-								</h4>
-								<p>When she reached the first hills of the Italic Mountains, she had a last view back on
-									the skyline of her hometown Bookmarksgrov</p>
-								<p class="star">
-									<span class="text-left"><a href="#" class="reply"><i
-												class="icon-reply"></i></a></span>
-								</p>
-							</div>
-						</div>
-						<div class="review">
-							<div class="user-img" style="background-image: url(images/person2.jpg)"></div>
-							<div class="desc">
-								<h4>
-									<span class="text-left">Jacob Webb</span>
-									<span class="text-right">24 March 2018</span>
-								</h4>
-								<p>When she reached the first hills of the Italic Mountains, she had a last view back on
-									the skyline of her hometown Bookmarksgrov</p>
-								<p class="star">
-									<span class="text-left"><a href="#" class="reply"><i
-												class="icon-reply"></i></a></span>
-								</p>
-							</div>
-						</div>
-						<div class="review">
-							<div class="user-img" style="background-image: url(images/person3.jpg)"></div>
-							<div class="desc">
-								<h4>
-									<span class="text-left">Jacob Webb</span>
-									<span class="text-right">24 March 2018</span>
-								</h4>
-								<p>When she reached the first hills of the Italic Mountains, she had a last view back on
-									the skyline of her hometown Bookmarksgrov</p>
-								<p class="star">
-									<span class="text-left"><a href="#" class="reply"><i
-												class="icon-reply"></i></a></span>
-								</p>
-							</div>
-						</div>
+						@if (Model.Comments.Count() == 0)
+						{
+							<h2 class="heading-2" style="font-weight: normal;">Henüz yorum yapılmadı. İlk yorumu siz yapın.
+							</h2>
+						}
+						else
+						{
+							<h2 class="heading-2" style="font-weight: normal;"><strong>@Model.Comments.Count()</strong> adet
+								yorum bulunmaktadır.</h2>
+
+							@foreach (var item in Model.Comments)
+							{
+								<div class="review">
+									<div class="user-img"
+										style='background-image: url(@(Url.Content("~/uploads/images/person.png")))'></div>
+									<div class="desc">
+										<h4>
+											<span class="text-left">@(item.Name + " " + item.Lastname)</span>
+											<span class="text-right">@(String.Format("{0:dd MMM yyyy}", item.Date))</span>
+										</h4>
+										<p>@item.Message</p>										
+									</div>
+								</div>
+							}
+						}
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-md-12">
 						<h2 class="heading-2">Say something</h2>

@@ -73,15 +73,22 @@ public partial class PmitLn2oqDb0001Context : DbContext
             entity.Property(e => e.Id)
                 .HasColumnType("int(11)")
                 .HasColumnName("id");
-            entity.Property(e => e.Comment1)
-                .HasColumnType("text")
-                .HasColumnName("comment");
             entity.Property(e => e.Date)
                 .HasColumnType("datetime")
                 .HasColumnName("date");
-            entity.Property(e => e.Person)
+            entity.Property(e => e.Email)
                 .HasMaxLength(250)
-                .HasColumnName("person");
+                .HasColumnName("email");
+            entity.Property(e => e.Isview).HasColumnName("isview");
+            entity.Property(e => e.Lastname)
+                .HasMaxLength(100)
+                .HasColumnName("lastname");
+            entity.Property(e => e.Message)
+                .HasColumnType("text")
+                .HasColumnName("message");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .HasColumnName("name");
             entity.Property(e => e.Type)
                 .HasMaxLength(50)
                 .HasColumnName("type");
