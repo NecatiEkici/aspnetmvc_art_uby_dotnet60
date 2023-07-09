@@ -3,6 +3,7 @@
 @{
 	ViewData["Title"] = "Blog";
 	ViewData["Subtitle"] = Model.Blog!.Title;
+	TempData["Url"]=ViewContext.HttpContext.Request.Path.ToString();
 }
 
 @{
@@ -16,6 +17,8 @@
 				<div class="row row-pb-lg">
 					<div class="col-md-12">
 						<div class="blog-entry">
+
+
 							<div class="blog-img blog-detail">
 								<img src="~/uploads/images/@Model.Blog.Image" class="img-responsive"
 									alt="html5 bootstrap template">
@@ -37,7 +40,7 @@
 				</div>
 				<div class="row row-pb-lg">
 					<div class="col-md-12">
-						@if (Model.Comments.Count() == 0)
+						@if (Model.Comments == null)
 						{
 							<h2 class="heading-2" style="font-weight: normal;">Henüz yorum yapılmadı. İlk yorumu siz yapın.
 							</h2>
@@ -57,7 +60,7 @@
 											<span class="text-left">@(item.Name + " " + item.Lastname)</span>
 											<span class="text-right">@(String.Format("{0:dd MMM yyyy}", item.Date))</span>
 										</h4>
-										<p>@item.Message</p>										
+										<p>@item.Message</p>
 									</div>
 								</div>
 							}
@@ -67,47 +70,67 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="heading-2">Say something</h2>
-						<form action="#">
+						<h2 class="heading-2">Yorum Ekle</h2>
+
+						<form method="post" action="/comment">
+							@Html.AntiForgeryToken()
 							<div class="row form-group">
 								<div class="col-md-6">
 									<!-- <label for="fname">First Name</label> -->
-									<input type="text" id="fname" class="form-control" placeholder="Your firstname">
+									<input asp-for="Name" type="text" name="Name" class="form-control"
+										placeholder="Adınız *">
+									<span asp-validation-for="Name" class="text-danger"></span>
 								</div>
 								<div class="col-md-6">
 									<!-- <label for="lname">Last Name</label> -->
-									<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+									<input asp-for="Lastname" type="text" name="Lastname" class="form-control"
+										placeholder="Soyadınız *">
+									<span asp-validation-for="Lastname" class="text-danger"></span>
+
 								</div>
 							</div>
 
 							<div class="row form-group">
 								<div class="col-md-12">
 									<!-- <label for="email">Email</label> -->
-									<input type="text" id="email" class="form-control" placeholder="Your email address">
+									<input asp-for="Email" type="email" name="Email" class="form-control"
+										placeholder="Email Adresiniz *">
+									<span asp-validation-for="Email" class="text-danger"></span>
+
 								</div>
 							</div>
 
-							<div class="row form-group">
-								<div class="col-md-12">
-									<!-- <label for="subject">Subject</label> -->
-									<input type="text" id="subject" class="form-control"
-										placeholder="Your subject of this message">
-								</div>
-							</div>
 
 							<div class="row form-group">
 								<div class="col-md-12">
 									<!-- <label for="message">Message</label> -->
-									<textarea name="message" id="message" cols="30" rows="10" class="form-control"
-										placeholder="Say something about us"></textarea>
+									<textarea asp-for="Message" name="Message" cols="30" rows="10" class="form-control"
+										placeholder="Yorumunuz *"></textarea>
+									<span asp-validation-for="Message" class="text-danger"></span>
+
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="submit" value="Post Comment" class="btn btn-primary">
+								<input type="submit" value="Kaydet" class="btn btn-primary">
 							</div>
+
+							<input type="hidden" name="Type" value="blog">
+							<input type="hidden" name="Typeid" value="@Model.Blog.Id">
+
 						</form>
 					</div>
+
+
 				</div>
+				@if (TempData["Success"] != null)
+				{
+					<div class="alert alert-success" role="alert">
+						@TempData["Success"]
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				}
 			</div>
 			<div class="col-md-3">
 				@{

@@ -4278,6 +4278,7 @@ button.list-group-item-danger {
     filter: alpha(opacity=50); }
 
 button.close {
+  font-size: 32px;
   padding: 0;
   cursor: pointer;
   background: transparent;
