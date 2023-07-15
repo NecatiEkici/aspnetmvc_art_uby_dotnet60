@@ -14,7 +14,7 @@ public class IndexViewModel
     public string? Lastname { get; set; }
 
     [Required(ErrorMessage = "Lütfen doldurunuz!")]
-    [EmailAddress(ErrorMessage ="Geçerli bir e-mail adresi giriniz!")]
+    [EmailAddress(ErrorMessage = "Geçerli bir e-mail adresi giriniz!")]
     public string? Email { get; set; }
 
     [Required(ErrorMessage = "Lütfen doldurunuz!")]
@@ -28,6 +28,9 @@ public class IndexViewModel
 
     public Blog? Blog { get; set; }
     public IEnumerable<Blog>? Blogs { get; set; }
+
+    public Event? Event { get; set; }
+    public IEnumerable<Event>? Events { get; set; }
     public IEnumerable<Comment>? Comments { get; set; }
 
 }

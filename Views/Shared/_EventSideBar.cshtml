@@ -1,0 +1,31 @@
+<div class="sidebar">
+
+    <div class="side">
+        <div class="form-group">
+            <input type="text" class="form-control" id="search" placeholder="Enter any key to search...">
+            <button type="submit" class="btn btn-primary"><i class="icon-search3"></i></button>
+        </div>
+    </div>
+
+    <div class="side">
+        <h2 class="sidebar-heading">Arşiv</h2>
+        <p>
+        <ul class="category">
+            <li><a href="#"><i class="icon-check"></i> Haz 2023 <span class="badge">3</span></a></li>
+            <li><a href="#"><i class="icon-check"></i> May 2023 <span class="badge">3</span></a></li>
+            <li><a href="#"><i class="icon-check"></i> Nis 2023 <span class="badge">3</span></a></li>
+            <li><a href="#"><i class="icon-check"></i> Mar 2023 <span class="badge">3</span></a></li>
+            <li><a href="#"><i class="icon-check"></i> Şub 2023 <span class="badge">3</span></a></li>
+            <li><a href="#"><i class="icon-check"></i> Oca 2023 <span class="badge">3</span></a></li>
+            <li><a href="#"><i class="icon-check"></i> 2022 <span class="badge">3</span></a></li>
+            <li><a href="#"><i class="icon-check"></i> 2021 <span class="badge">3</span></a></li>
+        </ul>
+        </p>
+    </div>
+
+
+    @{
+        await Html.RenderPartialAsync("_Subscribe");
+    }
+
+</div>

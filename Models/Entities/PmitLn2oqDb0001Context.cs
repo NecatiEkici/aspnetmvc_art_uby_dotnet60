@@ -19,6 +19,8 @@ public partial class PmitLn2oqDb0001Context : DbContext
 
     public virtual DbSet<Comment> Comments { get; set; }
 
+    public virtual DbSet<Event> Events { get; set; }
+
     public virtual DbSet<Site> Sites { get; set; }
 
     public virtual DbSet<Slide> Slides { get; set; }
@@ -97,6 +99,40 @@ public partial class PmitLn2oqDb0001Context : DbContext
             entity.Property(e => e.Typeid)
                 .HasColumnType("int(11)")
                 .HasColumnName("typeid");
+        });
+
+        modelBuilder.Entity<Event>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("event");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Date)
+                .HasColumnType("datetime")
+                .HasColumnName("date");
+            entity.Property(e => e.Dateend)
+                .HasColumnType("datetime")
+                .HasColumnName("dateend");
+            entity.Property(e => e.Detail).HasColumnName("detail");
+            entity.Property(e => e.Image)
+                .HasMaxLength(250)
+                .HasColumnName("image");
+            entity.Property(e => e.Isview).HasColumnName("isview");
+            entity.Property(e => e.Like)
+                .HasColumnType("int(11)")
+                .HasColumnName("like");
+            entity.Property(e => e.Read)
+                .HasColumnType("int(11)")
+                .HasColumnName("read");
+            entity.Property(e => e.Subtitle)
+                .HasMaxLength(500)
+                .HasColumnName("subtitle");
+            entity.Property(e => e.Title)
+                .HasMaxLength(250)
+                .HasColumnName("title");
         });
 
         modelBuilder.Entity<Site>(entity =>

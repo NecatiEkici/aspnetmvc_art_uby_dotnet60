@@ -1,8 +1,8 @@
 @model Art.Models.IndexViewModel
 
 @{
-	ViewData["Title"] = "Blog";
-	ViewData["Subtitle"] = Model.Blog!.Title;	
+	ViewData["Title"] = "Sergi ve Etkinlikler";
+	ViewData["Subtitle"] = Model.Event!.Title;	
 }
 
 @{
@@ -19,20 +19,20 @@
 
 
 							<div class="blog-img blog-detail">
-								<img src="~/uploads/images/@Model.Blog.Image" class="img-responsive"
+								<img src="~/uploads/images/@Model.Event.Image" class="img-responsive"
 									alt="html5 bootstrap template">
 							</div>
 							<div class="desc">
 								<p class="meta">
 									
-									<span class="date">@(String.Format("{0:dd MMM yyyy}", Model.Blog.Date))</span>
-									<span class="pos"><i class="icon-eye text-success"></i> @Model.Blog.Read </span>
+									<span class="date">@(String.Format("{0:dd MMM yyyy}", Model.Event.Date)) - @(String.Format("{0:dd MMM yyyy}", Model.Event.Dateend))</span>
+									<span class="pos"><i class="icon-eye text-success"></i> @Model.Event.Read </span>
 									<span class="pos"><i class="fa-sharp fa-solid fa-heart text-danger"></i>
-										@Model.Blog.Like
+										@Model.Event.Like
 									</span>
 								</p>
-								<h2>@Model.Blog.Title</h2>
-								@Html.Raw(Model.Blog.Detail)
+								<h2>@Model.Event.Title</h2>
+								@Html.Raw(Model.Event.Detail)
 							</div>
 						</div>
 					</div>
@@ -113,8 +113,8 @@
 								<input type="submit" value="Kaydet" class="btn btn-primary">
 							</div>
 
-							<input type="hidden" name="Type" value="blog">
-							<input type="hidden" name="Typeid" value="@Model.Blog.Id">
+							<input type="hidden" name="Type" value="event">
+							<input type="hidden" name="Typeid" value="@Model.Event.Id">
 
 						</form>
 					</div>
@@ -133,7 +133,7 @@
 			</div>
 			<div class="col-md-3">
 				@{
-					await Html.RenderPartialAsync("_BlogSideBar");
+					await Html.RenderPartialAsync("_EventSideBar");
 				}
 			</div>
 		</div>

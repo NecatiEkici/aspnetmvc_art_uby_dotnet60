@@ -1,6 +1,28 @@
+@model Art.Models.IndexViewModel
+
 @{
+
     ViewData["Title"] = "Sergi ve Etkinlikler";
+    int currentPage = 1;
+
+    var sessionCurrentPage = ViewContext.HttpContext.Session.GetInt32("currentPage");
+
+    if (sessionCurrentPage != null)
+    {
+        currentPage = int.Parse(sessionCurrentPage.ToString()!);
+    }
+
+    int defaultPageCount = Model.Site!.Page; //sayfabaşı listelenecek kayıt adeti vtden alıyor
+    int eventCount = Model.Events!.Count(); //event tablosundaki kayıt edeti
+    int mod = eventCount % defaultPageCount; // event tablosundaki kayıt adetinin sayfa başı ürün adetine bölümendeki kalan
+    int page = eventCount / defaultPageCount; // listelenecek sayfa adeti
+
+    if (mod > 0)
+    {
+        page++;
+    }
 }
+
 
 @{
     await Html.RenderPartialAsync("_BreadCrumbs");
@@ -10,289 +32,78 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9 content">
-                <div class="row row-pb-md">
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <a href="blog.html"><img src="images/blog-1.jpg" class="img-responsive"
-                                        alt="html5 bootstrap template"></a>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Events</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-slider">
-                                <div class="owl-carousel">
-                                    <div class="item">
-                                        <a href="blog.html" class="image-popup-link"><img src="images/blog-3.jpg"
-                                                class="img-responsive" alt="html5 bootstrap template"></a>
+
+                @if (Model.Events != null)
+                {
+                    <div class="row row-pb-md">
+                        @foreach (var item in Model.Events.Skip((currentPage - 1) * defaultPageCount).Take(defaultPageCount))
+                        {
+                            <div class="col-md-6">
+                                <div class="blog-entry">
+                                    <div class="blog-img">
+                                        <a href="/event/@Methods.GenerateUrl(item.Title!)/@item.Id"><img
+                                                src="~/uploads/images/@item.Image" class="img-responsive"
+                                                alt="html5 bootstrap template"></a>
                                     </div>
-                                    <div class="item">
-                                        <a href="blog.html" class="image-popup-link"><img src="images/blog-4.jpg"
-                                                class="img-responsive" alt="html5 bootstrap template"></a>
+                                    <div class="desc">
+                                        <p class="meta">
+                                           
+                                            <span class="date">@(String.Format("{0:dd MMM yyyy}", item.Date)) - @(String.Format("{0:dd MMM yyyy}", item.Dateend))</span>
+                                            <span class="pos"><i class="icon-eye text-success"></i> @item.Read </span>
+                                            <span class="pos"><i class="fa-sharp fa-solid fa-heart text-danger"></i> @item.Like
+                                            </span>
+                                        </p>
+                                        <h2><a href="/event/@Methods.GenerateUrl(item.Title!)/@item.Id">@item.Title</a></h2>
+                                        <p>@item.Subtitle</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Travel</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
+                        }
                     </div>
-                </div>
-                <div class="row row-pb-md">
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <a href="blog.html"><img src="images/blog-4.jpg" class="img-responsive"
-                                        alt="html5 bootstrap template"></a>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Lifestyle</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <a href="blog.html"><img src="images/blog-5.jpg" class="img-responsive"
-                                        alt="html5 bootstrap template"></a>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Events</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-pb-md">
-                    <div class="col-md-12">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <div class="video colorlib-video" style="background-image: url(images/blog-8.jpg);">
-                                    <a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo"><i
-                                            class="icon-play"></i></a>
-                                    <div class="overlay"></div>
-                                </div>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Watch</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Watch our video how to make website</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-pb-md">
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <a href="blog.html"><img src="images/blog-9.jpg" class="img-responsive"
-                                        alt="html5 bootstrap template"></a>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Events</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <a href="blog.html"><img src="images/blog-10.jpg" class="img-responsive"
-                                        alt="html5 bootstrap template"></a>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Events</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-pb-md">
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <a href="blog.html"><img src="images/blog-12.jpg" class="img-responsive"
-                                        alt="html5 bootstrap template"></a>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Events</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-entry">
-                            <div class="blog-img">
-                                <a href="blog.html"><img src="images/blog-13.jpg" class="img-responsive"
-                                        alt="html5 bootstrap template"></a>
-                            </div>
-                            <div class="desc">
-                                <p class="meta">
-                                    <span class="cat"><a href="#">Events</a></span>
-                                    <span class="date">20 March 2018</span>
-                                    <span class="pos">By <a href="#">Rich</a></span>
-                                </p>
-                                <h2><a href="blog.html">Recipe for your site</a></h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
+
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+                        @if (page > 1)
+                        {
+                            <ul class="pagination">
+                                <li class='@(currentPage==1?"disabled":"")'>
+                                    @if (currentPage == 1)
+                                    {
+                                        <a>&laquo;</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="~/event/@(currentPage-1)">&laquo;</a>
+                                    }
+                                </li>
+                                @for (int i = 1; i <= page; i++)
+                                {
+                                    <li class='@(currentPage==i?"active":"")'><a href="~/event/@i">@i</a></li>
+                                }
+                                <li class='@(currentPage==page?"disabled":"")'>
+                                    @if (currentPage == page)
+                                    {
+                                        <a>&raquo;</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="~/event/@(currentPage+1)">&raquo;</a>
+                                    }
+                                </li>
+                            </ul>
+                        }
                     </div>
                 </div>
+
+
+
+
             </div>
             <div class="col-md-3">
-                <div class="sidebar">
-                    <div class="side">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="search"
-                                placeholder="Enter any key to search...">
-                            <button type="submit" class="btn btn-primary"><i class="icon-search3"></i></button>
-                        </div>
-                    </div>
-                    <div class="side">
-                        <h2 class="sidebar-heading">Categories</h2>
-                        <p>
-                        <ul class="category">
-                            <li><a href="#"><i class="icon-check"></i> Home</a></li>
-                            <li><a href="#"><i class="icon-check"></i> About Me</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Blog</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Travel</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Lifestyle</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Fashion</a></li>
-                            <li><a href="#"><i class="icon-check"></i> Health</a></li>
-                        </ul>
-                        </p>
-                    </div>
-                    <div class="side">
-                        <h2 class="sidebar-heading">Recent Blog</h2>
-                        <div class="f-blog">
-                            <a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
-                            </a>
-                            <div class="desc">
-                                <h3><a href="blog.html">Be a designer</a></h3>
-                                <p class="admin"><span>25 March 2018</span></p>
-                            </div>
-                        </div>
-                        <div class="f-blog">
-                            <a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
-                            </a>
-                            <div class="desc">
-                                <h3><a href="blog.html">How to build website</a></h3>
-                                <p class="admin"><span>24 March 2018</span></p>
-                            </div>
-                        </div>
-                        <div class="f-blog">
-                            <a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
-                            </a>
-                            <div class="desc">
-                                <h3><a href="blog.html">Create website</a></h3>
-                                <p class="admin"><span>23 March 2018</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="side">
-                        <h2 class="sidebar-heading">Instagram</h2>
-                        <div class="instagram-entry">
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-1.jpg);">
-                            </a>
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-2.jpg);">
-                            </a>
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-3.jpg);">
-                            </a>
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-4.jpg);">
-                            </a>
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-5.jpg);">
-                            </a>
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-6.jpg);">
-                            </a>
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-7.jpg);">
-                            </a>
-                            <a href="#" class="instagram text-center"
-                                style="background-image: url(images/gallery-8.jpg);">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="side">
-                        <div class="form-group">
-                            <input type="text" class="form-control form-email text-center" id="email"
-                                placeholder="Enter your email">
-                            <button type="submit" class="btn btn-primary btn-subscribe">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
+                @{
+                    await Html.RenderPartialAsync("_EventSideBar");
+                }
             </div>
         </div>
     </div>

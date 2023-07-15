@@ -42,9 +42,9 @@
             <div class="col-md-3">
                 <h2>SERGİ VE ETKİNLİKLER</h2>
                 
-                @if (Model.Blogs != null)
+                @if (Model.Events != null)
                 {
-                    @foreach (var item in Model.Blogs.Take(3))
+                    @foreach (var item in Model.Events.Take(3))
                     {
                         <div class="f-blog">
                             <a href="/blog/@Methods.GenerateUrl(item.Title!)/@item.Id" class="blog-img"
@@ -52,7 +52,7 @@
                             </a>
                             <div class="desc">
                                 <h3><a href="/blog/@Methods.GenerateUrl(item.Title!)/@item.Id">@item.Title</a></h3>
-                                <p class="admin"><span>@(String.Format("{0:dd MMM yyyy}", item.Date))</span></p>
+                                <p class="admin"><span>@(String.Format("{0:dd MMM yyyy}", item.Date)) - @(String.Format("{0:dd MMM yyyy}", item.Dateend))</span></p>
                             </div>
                         </div>
                     }
