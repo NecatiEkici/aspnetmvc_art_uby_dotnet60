@@ -1,0 +1,141 @@
+@model Art.Models.IndexViewModel
+
+@{
+	ViewData["Title"] = "Sergi ve Etkinlikler";
+	ViewData["Subtitle"] = Model.Event!.Title;	
+}
+
+@{
+	await Html.RenderPartialAsync("_BreadCrumbs");
+}
+
+<div id="colorlib-container">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 content">
+				<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="blog-entry">
+
+
+							<div class="blog-img blog-detail">
+								<img src="~/uploads/images/@Model.Event.Image" class="img-responsive"
+									alt="html5 bootstrap template">
+							</div>
+							<div class="desc">
+								<p class="meta">
+									
+									<span class="date">@(String.Format("{0:dd MMM yyyy}", Model.Event.Date)) - @(String.Format("{0:dd MMM yyyy}", Model.Event.Dateend))</span>
+									<span class="pos"><i class="icon-eye text-success"></i> @Model.Event.Read </span>
+									<span class="pos"><i class="fa-sharp fa-solid fa-heart text-danger"></i>
+										@Model.Event.Like
+									</span>
+								</p>
+								<h2>@Model.Event.Title</h2>
+								@Html.Raw(Model.Event.Detail)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row row-pb-lg">
+					<div class="col-md-12">
+						@if (Model.Comments == null)
+						{
+								<h2 class="heading-2" style="font-weight: normal;">Henüz yorum yapılmadı. İlk yorumu siz yapın.
+								</h2>
+						}
+						else
+						{
+								<h2 class="heading-2" style="font-weight: normal;"><strong>@Model.Comments.Count()</strong> adet
+									yorum bulunmaktadır.</h2>
+
+							@foreach (var item in Model.Comments)
+							{
+										<div class="review">
+											<div class="user-img"
+												style='background-image: url(@(Url.Content("~/uploads/images/person.png")))'></div>
+											<div class="desc">
+												<h4>
+													<span class="text-left">@(item.Name + " " + item.Lastname)</span>
+													<span class="text-right">@(String.Format("{0:dd MMM yyyy}", item.Date))</span>
+												</h4>
+												<p>@item.Message</p>
+											</div>
+										</div>
+							}
+						}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="heading-2">Yorum Ekle</h2>
+
+						<form method="post" action="/comment">
+							@Html.AntiForgeryToken()
+							<div class="row form-group">
+								<div class="col-md-6">
+									<!-- <label for="fname">First Name</label> -->
+									<input asp-for="Name" type="text" name="Name" class="form-control"
+										placeholder="Adınız *">
+									<span asp-validation-for="Name" class="text-danger"></span>
+								</div>
+								<div class="col-md-6">
+									<!-- <label for="lname">Last Name</label> -->
+									<input asp-for="Lastname" type="text" name="Lastname" class="form-control"
+										placeholder="Soyadınız *">
+									<span asp-validation-for="Lastname" class="text-danger"></span>
+
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<!-- <label for="email">Email</label> -->
+									<input asp-for="Email" type="email" name="Email" class="form-control"
+										placeholder="Email Adresiniz *">
+									<span asp-validation-for="Email" class="text-danger"></span>
+
+								</div>
+							</div>
+
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<!-- <label for="message">Message</label> -->
+									<textarea asp-for="Message" name="Message" cols="30" rows="10" class="form-control"
+										placeholder="Yorumunuz *"></textarea>
+									<span asp-validation-for="Message" class="text-danger"></span>
+
+								</div>
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Kaydet" class="btn btn-primary">
+							</div>
+
+							<input type="hidden" name="Type" value="event">
+							<input type="hidden" name="Typeid" value="@Model.Event.Id">
+
+						</form>
+					</div>
+
+
+				</div>
+				@if (TempData["Success"] != null)
+				{
+						<div class="alert alert-success" role="alert">
+						@TempData["Success"]
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+				}
+			</div>
+			<div class="col-md-3">
+				@{
+					await Html.RenderPartialAsync("_EventSideBar");
+				}
+			</div>
+		</div>
+	</div>
+</div>

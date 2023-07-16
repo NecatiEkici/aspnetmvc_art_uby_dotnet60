@@ -27,6 +27,10 @@ public partial class PmitLn2oqDb0001Context : DbContext
 
     public virtual DbSet<Subscribe> Subscribes { get; set; }
 
+    public virtual DbSet<Work> Works { get; set; }
+
+    public virtual DbSet<Workcat> Workcats { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseMySql("server=93.89.225.198;port=3306;database=pmitLn2oq_db0001;user=pmitLn2oq_user01;password=Ds4FH2f8", Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.30-mysql"));
@@ -221,6 +225,65 @@ public partial class PmitLn2oqDb0001Context : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(250)
                 .HasColumnName("name");
+        });
+
+        modelBuilder.Entity<Work>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("work");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Catid)
+                .HasColumnType("int(11)")
+                .HasColumnName("catid");
+            entity.Property(e => e.Date)
+                .HasColumnType("datetime")
+                .HasColumnName("date");
+            entity.Property(e => e.Dateend)
+                .HasColumnType("datetime")
+                .HasColumnName("dateend");
+            entity.Property(e => e.Detail).HasColumnName("detail");
+            entity.Property(e => e.Image)
+                .HasMaxLength(250)
+                .HasColumnName("image");
+            entity.Property(e => e.Isview).HasColumnName("isview");
+            entity.Property(e => e.Like)
+                .HasColumnType("int(11)")
+                .HasColumnName("like");
+            entity.Property(e => e.Read)
+                .HasColumnType("int(11)")
+                .HasColumnName("read");
+            entity.Property(e => e.Subtitle)
+                .HasMaxLength(500)
+                .HasColumnName("subtitle");
+            entity.Property(e => e.Title)
+                .HasMaxLength(250)
+                .HasColumnName("title");
+        });
+
+        modelBuilder.Entity<Workcat>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("workcat");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Detail).HasColumnName("detail");
+            entity.Property(e => e.Image)
+                .HasMaxLength(250)
+                .HasColumnName("image");
+            entity.Property(e => e.Isview).HasColumnName("isview");
+            entity.Property(e => e.Subtitle)
+                .HasMaxLength(500)
+                .HasColumnName("subtitle");
+            entity.Property(e => e.Title)
+                .HasMaxLength(250)
+                .HasColumnName("title");
         });
 
         OnModelCreatingPartial(modelBuilder);

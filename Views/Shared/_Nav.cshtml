@@ -17,13 +17,19 @@
                 <div class="col-xs-10 text-right menu-1">
                     <ul>
                         <li class='@(action=="Index" || action==""?"active":"")'><a href="/">Ana Sayfa</a></li>
-                        <li class='has-dropdown @(action=="Work" || action=="WorkDetail"?"active":"")'>
-                            <a href="/work">Eserler</a>
-                            <ul class="dropdown">                               
-                                <li><a href="#">Tuval İşleri</a></li>
-                                <li><a href="#">Grafiti İşleri</a></li>
-                                <li><a href="#">Tattoo İşleri</a></li>                                
+                        <li class='has-dropdown @(action=="WorkCat" || action=="Work" || action=="WorkDetail" ?"active":"")'>
+                            <a href="/workcat">Eserler</a>
+                            @if (Model.Workcats!=null)
+                            {                            
+                           
+                            <ul class="dropdown"> 
+                                @foreach (var item in Model.Workcats)
+                                {
+                                <li><a href="/workcat/@Methods.GenerateUrl(item.Title!)/@item.Id">@item.Title</a></li>                                    
+                                }                                                 
                             </ul>
+                             }
+
                         </li>
                         <li class='@(action=="Event" || action=="EventDetail" ?"active":"")'><a href="/event">Sergi ve Etkinlikler</a></li>
                         <li class='@(action=="Blog" || action=="BlogDetail"?"active":"")'><a href="/blog">Blog</a></li>

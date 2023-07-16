@@ -32,7 +32,7 @@ public class HomeController : Controller
 			Slides = db.Slides!.OrderBy(x => x.Order).Where(x => x.Isview == true).ToList(),
 			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
-
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 		};
 		return View(model);
 	}
@@ -46,6 +46,7 @@ public class HomeController : Controller
 			Site = db.Sites!.First(),
 			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 		};
 		return View(model);
 	}
@@ -58,6 +59,7 @@ public class HomeController : Controller
 			Site = db.Sites!.First(),
 			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 		};
 		return View(model);
 	}
@@ -77,6 +79,7 @@ public class HomeController : Controller
 			Site = db.Sites!.First(),
 			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 		};
 		return View(model);
 	}
@@ -90,45 +93,48 @@ public class HomeController : Controller
 			Blog = db.Blogs!.FirstOrDefault(x => x.Isview == true && x.Id == id),
 			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
-			Comments = db.Comments!.OrderByDescending(x => x.Id).Where(x => x.Isview == true && x.Type == "blog" && x.Typeid == id).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),		
+			Comments = db.Comments!.OrderByDescending(x => x.Id).Where(x => x.Isview == true && x.Type == "blog" && x.Typeid == id).ToList(),		
 		};
 
 		return View(model);
 	}
 	
 	[Route("/event/{currentPage?}")]
-    public IActionResult Event(int currentPage)
-    {
-        if (currentPage == 0)
-        {
-            currentPage = 1;
-        }
+	public IActionResult Event(int currentPage)
+	{
+		if (currentPage == 0)
+		{
+			currentPage = 1;
+		}
 
-        HttpContext.Session.SetInt32("currentPage", currentPage);
+		HttpContext.Session.SetInt32("currentPage", currentPage);
 
-        var model = new IndexViewModel()
-        {
-            Site = db.Sites!.First(),
-            Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
-            Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
-        };
-        return View(model);
-    }
+		var model = new IndexViewModel()
+		{
+			Site = db.Sites!.First(),
+			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),			
+		};
+		return View(model);
+	}
 
-    [Route("/event/{title?}/{id?}")]
-    public IActionResult EventDetail(String title, int id)
-    {
-        var model = new IndexViewModel()
-        {
-            Site = db.Sites!.First(),
-            Event = db.Events!.FirstOrDefault(x => x.Isview == true && x.Id == id),
-            Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
-            Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
-            Comments = db.Comments!.OrderByDescending(x => x.Id).Where(x => x.Isview == true && x.Type == "event" && x.Typeid == id).ToList(),
-        };
+	[Route("/event/{title?}/{id?}")]
+	public IActionResult EventDetail(String title, int id)
+	{
+		var model = new IndexViewModel()
+		{
+			Site = db.Sites!.First(),
+			Event = db.Events!.FirstOrDefault(x => x.Isview == true && x.Id == id),
+			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),			
+			Comments = db.Comments!.OrderByDescending(x => x.Id).Where(x => x.Isview == true && x.Type == "event" && x.Typeid == id).ToList(),
+		};
 
-        return View(model);
-    }
+		return View(model);
+	}
 
 	[HttpPost]
 	[ValidateAntiForgeryToken]
@@ -164,15 +170,57 @@ public class HomeController : Controller
 
 	
 
-	[Route("/work")]
-	public IActionResult Work()
+	[Route("/workcat")]
+	public IActionResult WorkCat()
 	{
 		var model = new IndexViewModel()
 		{
-			Site = db.Sites!.First()
+			Site = db.Sites!.First(),
+			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),				
 		};
 		return View(model);
 	}
+	
+	[Route("/workcat/{catTitle}/{catId}/{currentPage?}")]
+	public IActionResult Work(String catTitle, int catId, int currentPage)
+	{
+		if (currentPage == 0)
+		{
+			currentPage = 1;
+		}
+
+		HttpContext.Session.SetInt32("currentPage", currentPage);
+
+		var model = new IndexViewModel()
+		{
+			Site = db.Sites!.First(),
+			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Works = db.Works!.OrderByDescending(x => x.Id).Where(x => x.Isview == true && x.Catid==catId).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcat = db.Workcats!.FirstOrDefault(x => x.Isview == true && x.Id==catId ),						
+		};
+		return View(model);
+	}
+
+	[Route("/work/{title?}/{id?}")]
+	public IActionResult WorkDetail(String title, int id)
+	{
+		var model = new IndexViewModel()
+		{
+			Site = db.Sites!.First(),
+			Work = db.Works!.FirstOrDefault(x => x.Isview == true && x.Id == id),
+			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
+			Workcats = db.Workcats!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),			
+			Comments = db.Comments!.OrderByDescending(x => x.Id).Where(x => x.Isview == true && x.Type == "event" && x.Typeid == id).ToList(),
+		};
+
+		return View(model);
+	}
+
 
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	public IActionResult Error()
