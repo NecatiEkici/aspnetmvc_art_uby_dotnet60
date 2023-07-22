@@ -21,6 +21,8 @@ public partial class PmitLn2oqDb0001Context : DbContext
 
     public virtual DbSet<Event> Events { get; set; }
 
+    public virtual DbSet<Like> Likes { get; set; }
+
     public virtual DbSet<Site> Sites { get; set; }
 
     public virtual DbSet<Slide> Slides { get; set; }
@@ -137,6 +139,26 @@ public partial class PmitLn2oqDb0001Context : DbContext
             entity.Property(e => e.Title)
                 .HasMaxLength(250)
                 .HasColumnName("title");
+        });
+
+        modelBuilder.Entity<Like>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("like");
+
+            entity.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .HasColumnName("id");
+            entity.Property(e => e.Ip)
+                .HasMaxLength(100)
+                .HasColumnName("ip");
+            entity.Property(e => e.Type)
+                .HasMaxLength(50)
+                .HasColumnName("type");
+            entity.Property(e => e.Typeid)
+                .HasColumnType("int(11)")
+                .HasColumnName("typeid");
         });
 
         modelBuilder.Entity<Site>(entity =>

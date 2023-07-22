@@ -1,8 +1,7 @@
 @model Art.Models.IndexViewModel
 
 @{
-    var action = ViewContext.RouteData.Values["action"]!.ToString();
-    TempData["Url"] = ViewContext.HttpContext.Request.Path.ToString();
+    var action = ViewContext.RouteData.Values["action"]!.ToString();   
 }
 
 <nav class="colorlib-nav" role="navigation">

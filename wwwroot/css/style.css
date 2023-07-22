@@ -975,6 +975,11 @@ blockquote {
 .side .category li {
   list-style: none;
   font-size: 14px;
+  padding: 5px 10px;
+}
+
+.side .category li.active {
+ background-color: #f0f0f0;
 }
 
 .side .category li a {

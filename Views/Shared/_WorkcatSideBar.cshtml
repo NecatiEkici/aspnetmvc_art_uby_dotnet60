@@ -17,7 +17,7 @@
         <ul class="category">   
             @foreach (var item in Model.Workcats)
             {
-            <li class='@(Model.Work!.Catid==item.Id?"active":"")'> <a href="/workcat/@Methods.GenerateUrl(item.Title!)/@item.Id"><i class="icon-check"></i> @item.Title <span class="badge">@Model.AllWorks!.Where(x=>x.Catid==item.Id).Count()</span></a></li>                
+            <li class='@(Model.Workcat==item?"active":"")'> <a href="/workcat/@Methods.GenerateUrl(item.Title!)/@item.Id"><i class="icon-check"></i> @item.Title <span class="badge">@Model.AllWorks!.Where(x=>x.Catid==item.Id).Count()</span></a></li>                
             }
         </ul>  
         }    

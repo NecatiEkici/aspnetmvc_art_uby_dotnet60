@@ -34,10 +34,13 @@ public class IndexViewModel
 	
 	public Work? Work { get; set; }
 	public IEnumerable<Work>? Works { get; set; }
+	public IEnumerable<Work>? AllWorks { get; set; }
 	
 	public Workcat? Workcat { get; set; }	
 	public IEnumerable<Workcat>? Workcats { get; set; }
 	
 	public IEnumerable<Comment>? Comments { get; set; }
+	public IEnumerable<Like>? Likes { get; set; }
+	
 
 }
