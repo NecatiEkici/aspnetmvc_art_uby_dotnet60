@@ -2,6 +2,7 @@
 
 @{
     var action = ViewContext.RouteData.Values["action"]!.ToString();   
+    TempData["Url"] = ViewContext.HttpContext.Request.Path.ToString();
 }
 
 <nav class="colorlib-nav" role="navigation">

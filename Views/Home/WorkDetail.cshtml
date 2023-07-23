@@ -8,7 +8,8 @@
 	String ip = ViewContext.HttpContext.Connection.RemoteIpAddress!.ToString();
 
 	int like = Model.Likes!.Where(x => x.Type == "work" && x.Typeid == Model.Work.Id).Count();
-	bool isLike = Model.Likes!.Where(x => x.Ip == ip && x.Type == "work" && x.Typeid == Model.Work.Id).Count() > 0 ? true : false;
+	bool isLike = Model.Likes!.FirstOrDefault(x => x.Ip == ip && x.Type == "work" && x.Typeid == Model.Work.Id) != null ? true
+	: false;
 
 }
 
@@ -24,7 +25,7 @@
 					<div class="col-md-12">
 						<div class="blog-entry">
 
-							@ip
+
 							<div class="blog-img blog-detail">
 								<img src="~/uploads/images/@Model.Work.Image" class="img-responsive"
 									alt="html5 bootstrap template">
@@ -32,14 +33,10 @@
 							<div class="desc">
 								<p class="meta">
 
-									<span class="date">@(String.Format("{0:dd MMM yyyy}", Model.Work.Date)) -
+									<span class="date"> <i class="fa-solid fa-calendar-days"></i> @(String.Format("{0:dd MMM yyyy}", Model.Work.Date)) -
 										@(String.Format("{0:dd MMM yyyy}", Model.Work.Dateend))</span>
-									<span class="pos"><i class="icon-eye text-success"></i> @Model.Work.Read </span>
-									<span class="pos">
-										<a href="/like/work/@Model.Work.Id">
-										<i
-											class='fa-sharp fa-solid fa-heart @(isLike?"text-danger":"")'></i></a>
-										@like
+									<span class="pos"><i class="icon-eye text-success"></i>  @Model.Work.Read</span>
+									<span class="pos"><i class='fa-sharp fa-solid fa-heart @(isLike?"text-danger":"")' data-id="@Model.Work.Id" data-type="work"></i> <span id="likeCount">@like</span>
 									</span>
 								</p>
 								<h2>@Model.Work.Title</h2>

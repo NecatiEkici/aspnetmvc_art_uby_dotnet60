@@ -91,6 +91,12 @@ public class HomeController : Controller
 	[Route("/blog/{title?}/{id?}")]
 	public IActionResult BlogDetail(String title, int id)
 	{
+		
+		Blog toUpdate = db.Blogs.Find(id)!;
+		toUpdate.Read = toUpdate.Read + 1;
+		db.Entry(toUpdate).CurrentValues.SetValues(toUpdate);
+		db.SaveChanges();
+		
 		var model = new IndexViewModel()
 		{
 			Site = db.Sites!.First(),
@@ -129,6 +135,12 @@ public class HomeController : Controller
 	[Route("/event/{title?}/{id?}")]
 	public IActionResult EventDetail(String title, int id)
 	{
+		
+		Event toUpdate = db.Events.Find(id)!;
+		toUpdate.Read = toUpdate.Read + 1;
+		db.Entry(toUpdate).CurrentValues.SetValues(toUpdate);
+		db.SaveChanges();
+		
 		var model = new IndexViewModel()
 		{
 			Site = db.Sites!.First(),
@@ -180,6 +192,7 @@ public class HomeController : Controller
 	public IActionResult Like(String type, int id)
 	{
 		String ip = Request.HttpContext.Connection.RemoteIpAddress!.ToString();
+	   
 		if (db.Likes.Where(x=>x.Ip==ip && x.Typeid==id &&x.Type==type).Count()==0)
 		{
 			Like toAdd = new Like();
@@ -196,7 +209,10 @@ public class HomeController : Controller
 			db.SaveChanges();
 		}
 		
-		return Redirect(TempData["Url"]!.ToString()!);
+		int likeCount = db.Likes.Where(x => x.Typeid == id && x.Type == type).Count();
+
+		return Content(likeCount.ToString());
+	
 	}
 
 

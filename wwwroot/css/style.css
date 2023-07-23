@@ -342,7 +342,7 @@ figure {
 
 #colorlib-hero {
   height: 650px;
-  background: #fff url(../images/loader.gif) no-repeat center center;
+  background: #fff url(../uploads/images/loader.gif) no-repeat center center;
   width: 100%;
   float: left;
 }
@@ -1957,7 +1957,7 @@ input[type="text"] {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: url(../images/loader.gif) center no-repeat #fff;
+  background: url(../uploads/images/loader.gif) center no-repeat #fff;
 }
 
 .js .animate-box {
