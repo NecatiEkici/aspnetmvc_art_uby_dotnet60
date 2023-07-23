@@ -191,10 +191,7 @@ public class HomeController : Controller
 		}
 		else
 		{
-			Like toDelete = new Like();
-			toDelete.Type = type;
-			toDelete.Typeid = id;
-			toDelete.Ip = ip;
+			Like toDelete = db.Likes.FirstOrDefault(x=>x.Ip==ip && x.Typeid==id &&x.Type==type)!;			
 			db.Remove(toDelete);
 			db.SaveChanges();
 		}
