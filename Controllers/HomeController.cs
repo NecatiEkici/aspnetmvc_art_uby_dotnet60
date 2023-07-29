@@ -59,6 +59,7 @@ public class HomeController : Controller
 		var model = new IndexViewModel()
 		{
 			Site = db.Sites!.First(),
+			About = db.Abouts!.First(),
 			Blogs = db.Blogs!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 			Events = db.Events!.OrderByDescending(x => x.Id).Where(x => x.Isview == true).ToList(),
 			Likes = db.Likes!.OrderByDescending(x => x.Id).ToList(),
@@ -168,10 +169,25 @@ public class HomeController : Controller
 		return Redirect(TempData["Url"]!.ToString()!);
 	}
 
+	
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	[Route("/contactform")]
+	public IActionResult ContactForm(Contactform postedData)
+	{
+		postedData.Isview = false;
+		postedData.Date = DateTime.Now;
+		db.Contactforms.Add(postedData);
+		db.SaveChanges();
+		TempData["Success"] = " Başarıyla Kaydedildi! İncelendikten Sonra Yayınlanacaktır!";
+		return Redirect(TempData["Url"]!.ToString()!);
+	}
+
 	[HttpPost]
 	[ValidateAntiForgeryToken]
 	[Route("/subscribe")]
 	public IActionResult Subscribe(Subscribe postedData)
+	
 	{
 		if (db.Subscribes.FirstOrDefault(x => x.Email == postedData.Email) == null)
 		{

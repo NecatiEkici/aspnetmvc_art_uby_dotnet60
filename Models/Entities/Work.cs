@@ -24,6 +24,4 @@ public partial class Work
     public string? Image { get; set; }
 
     public int? Catid { get; set; }
-
-    public DateTime? Dateend { get; set; }
 }

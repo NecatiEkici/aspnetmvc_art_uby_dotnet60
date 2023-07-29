@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Art.Models.IndexViewModel
+@{
     ViewData["Title"] = "İletişim";
 }
 
@@ -8,30 +9,34 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="heading-2">Contact Information</h2>
+						<h2 class="heading-2">Bana ulaşın</h2>
 						<div class="row contact-info-wrap row-pb-lg">
 							<div class="col-md-3">
-								<p><span><i class="icon-location-2"></i></span> 198 West 21th Street, <br> Suite 721 New York NY 10016</p>
+								<p><span><i class="fa-solid fa-location-dot"></i></i></span>
+								@Model.Site!.Address, @Model.Site!.Postcode, @Model.Site!.District / @Model.Site!.City
+								</p>
 							</div>
 							<div class="col-md-3">
-								<p><span><i class="icon-phone3"></i></span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+								<p><span><i class="fa-solid fa-mobile-screen-button"></i></span> <a href='tel:@("+90"+Model.Site.Mobile)'
+								>+90 @String.Format("{0:(###)### ####}", Convert.ToInt64(@Model.Site.Mobile))</a></p>
 							</div>
 							<div class="col-md-3">
-								<p><span><i class="icon-paperplane"></i></span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+								<p><span><i class="fa-regular fa-envelope"></i></span> <a href="mailto:@Model.Site!.Email">info@yoursite.com</a></p>
 							</div>
 							<div class="col-md-3">
-								<p><span><i class="icon-globe"></i></span> <a href="#">yourwebsite.com</a></p>
+								<p><span><i class="fa-solid fa-earth-americas"></i></span> <a href="@Model.Site.Url">yourwebsite.com</a></p>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="row">
 							<div class="col-md-6">
-								<div id="map" class="colorlib-map"></div>
+								@Html.AntiForgeryToken
 							</div>
 							<div class="col-md-6">
 								<h2 class="heading-2">Get In Touch</h2>
-								<form action="#">
+								<form action="/contacform">
+								
 									<div class="row form-group">
 										<div class="col-md-6">
 											<label for="fname">First Name</label>

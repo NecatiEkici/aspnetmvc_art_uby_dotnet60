@@ -20,6 +20,10 @@ public class IndexViewModel
 	[Required(ErrorMessage = "Lütfen doldurunuz!")]
 	public string? Message { get; set; }
 
+	[Required(ErrorMessage = "Lütfen doldurunuz!")]
+	public string? Subject { get; set; }
+
+
 
 	/*Others*/
 	public Site? Site { get; set; }
@@ -41,6 +45,7 @@ public class IndexViewModel
 	
 	public IEnumerable<Comment>? Comments { get; set; }
 	public IEnumerable<Like>? Likes { get; set; }
+	public About? About { get; set; }
 	
 
 }
